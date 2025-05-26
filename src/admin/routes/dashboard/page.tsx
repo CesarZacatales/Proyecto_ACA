@@ -73,7 +73,7 @@ const CustomPage = () => {
 
 
   return (
-    <Container className="p-4 space-y-6 h-screen">
+    <Container className="p-4 space-y-6">
       <Heading level="h1">Dashboard</Heading>
 
       <div className="h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
