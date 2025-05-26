@@ -76,7 +76,7 @@ const CustomPage = () => {
     <Container className="p-4 space-y-6">
       <Heading level="h1">Dashboard</Heading>
 
-      <div className="h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* Gráfico: Pedidos por Cliente */}
         <div className="h-96 w-full p-4 rounded-xl border-2 shadow">
           <Bar
@@ -150,6 +150,7 @@ const CustomPage = () => {
         <div className="h-96 w-full p-4 rounded-xl border-2 shadow col-span-2">
           <GananciasChart />
         </div>
+
         {/* Gráfico: Productos por Colección */}
         <div className="h-96 w-full p-4 rounded-xl border-2 shadow">
           <Bar
@@ -217,8 +218,6 @@ const CustomPage = () => {
             }}
           />
         </div>
-
-
 
       </div>
     </Container>
