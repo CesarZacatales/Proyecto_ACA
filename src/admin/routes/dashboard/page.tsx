@@ -2,12 +2,6 @@ import { defineRouteConfig } from "@medusajs/admin-sdk"
 import { Container, Heading } from "@medusajs/ui"
 import { House } from "@medusajs/icons"
 import { useEffect, useState } from "react"
-
-type OrdersByCustomer = {
-  customer: string
-  orders: number
-}
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,8 +13,13 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"
+import { Bar } from "react-chartjs-2" 
+import GananciasChart from "./components/GananciasChart"
 
-import { Bar } from "react-chartjs-2"
+type OrdersByCustomer = {
+  customer: string
+  orders: number
+}
 
 ChartJS.register(
   CategoryScale,
@@ -32,7 +31,6 @@ ChartJS.register(
   Tooltip,
   Legend
 )
-
 
 const options = {
   responsive: true,
@@ -108,7 +106,7 @@ const CustomPage = () => {
               plugins: {
                 title: {
                   display: true,
-                  text: "Pedidos por Cliente", // 🔥 Título de la gráfica
+                  text: "Pedidos por Cliente",
                   color: "#fff",
                   font: {
                     size: 16,
@@ -129,6 +127,11 @@ const CustomPage = () => {
               },
             }}
           />
+        </div>
+
+        {/* Gráfico: Ganancias Mensuales */}
+        <div className="h-96 w-full p-4 rounded-xl border-2 shadow col-span-2">
+          <GananciasChart />
         </div>
     
       </div>
