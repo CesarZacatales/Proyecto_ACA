@@ -20,7 +20,7 @@ import {
   Legend,
 } from "chart.js"
 
-import { Bar, Line } from "react-chartjs-2"
+import { Bar } from "react-chartjs-2"
 
 ChartJS.register(
   CategoryScale,
@@ -58,15 +58,12 @@ const CustomPage = () => {
 
 
   return (
-    <Container className="p-4 space-y-6">
+    <Container className="p-4 space-y-6 h-screen">
       <Heading level="h1">Dashboard</Heading>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* Gráfico: Pedidos por Cliente */}
-        <div className="h-80 w-full bg-white p-4 rounded shadow">
-          <Heading level="h2" className="mb-4 text-base text-center font-semibold text-gray-700">
-            Pedidos por Cliente
-          </Heading>
+        <div className="h-96 w-full p-4 rounded-xl border-2 shadow">
           <Bar
             data={{
               labels: ordersByCustomer.map((c) => c.customer),
@@ -74,8 +71,12 @@ const CustomPage = () => {
                 {
                   label: "Pedidos",
                   data: ordersByCustomer.map((c) => c.orders),
-                  backgroundColor: "rgba(54, 162, 235, 0.6)",
-                  maxBarThickness: 28,
+                  backgroundColor: "#3b65ff",
+                  borderRadius: 8,
+                  barThickness: 20,
+                  categoryPercentage: 0.6,
+                  barPercentage: 0.8,
+                  
                 },
               ],
             }}
@@ -87,14 +88,17 @@ const CustomPage = () => {
                 x: {
                   ticks: {
                     font: { size: 12 },
+                    color: "#fff",
                   },
                   grid: {
                     display: true,
+                    color: "#444",
                   },
                 },
                 y: {
                   ticks: {
                     font: { size: 12 },
+                    color: "#fff",
                   },
                   grid: {
                     display: false,
@@ -102,10 +106,20 @@ const CustomPage = () => {
                 },
               },
               plugins: {
+                title: {
+                  display: true,
+                  text: "Pedidos por Cliente", // 🔥 Título de la gráfica
+                  color: "#fff",
+                  font: {
+                    size: 16,
+                    weight: "bold",
+                  },
+                },
                 legend: {
                   position: "top",
                   labels: {
                     font: { size: 12 },
+                    color: "#fff",
                   },
                 },
                 tooltip: {
