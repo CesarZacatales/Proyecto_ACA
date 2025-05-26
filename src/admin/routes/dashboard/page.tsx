@@ -16,6 +16,7 @@ import {
 } from "chart.js"
 import { Bar, Pie } from "react-chartjs-2"
 import GananciasChart from "./components/GananciasChart"
+import { SortProductsDesc, SortByOrdersDesc } from "./utils"
 
 type OrdersByCustomer = {
   customer: string
@@ -75,7 +76,7 @@ const CustomPage = () => {
       .then(res => res.json())
       .then((data) => {
         // Ordena descendente por número de pedidos
-        const sorted = data.sort((a: { orders: number }, b: { orders: number }) => b.orders - a.orders)
+        const sorted = SortByOrdersDesc(data)
         setOrdersByCustomer(sorted)
       })
       .catch(err => console.error("Error al cargar métrica:", err))
@@ -86,7 +87,7 @@ const CustomPage = () => {
       .then(res => res.json())
       .then((data) => {
         // Ordena descendente por número de productos
-        const sorted = data.sort((a: { product_count: number }, b: { product_count: number }) => b.product_count - a.product_count)
+        const sorted = SortProductsDesc(data)
         setCollectionProducts(sorted)
       })
       .catch(err => console.error("Error al cargar colección de productos:", err))
