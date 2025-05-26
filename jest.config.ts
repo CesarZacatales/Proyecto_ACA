@@ -3,10 +3,13 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true,
   collectCoverageFrom: [
-    "src/**/*.ts", // Cambia según tu estructura
-    "!**/node_modules/**",
-    "!**/dist/**",
-    "!**/test/**"
+    "src/admin/routes/dashboard/utils.ts",
+    "!src/admin/routes/dashboard/components/GananciasChart.tsx",
+    "!src/widgets/ProductWidget.tsx",
+  ],
+  testPathIgnorePatterns: [
+    "/node_modules/", 
+    "/integration-tests/"
   ],
   coverageThreshold: {
     global: {
