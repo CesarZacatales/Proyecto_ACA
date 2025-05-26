@@ -9,11 +9,12 @@ import {
   BarElement,
   LineElement,
   PointElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js"
-import { Bar } from "react-chartjs-2"
+import { Bar, Pie } from "react-chartjs-2"
 import GananciasChart from "./components/GananciasChart"
 
 type OrdersByCustomer = {
@@ -26,6 +27,12 @@ type CollectionProduct = {
   product_count: number
 }
 
+type RegionOrder = {
+  region_name: string
+  order_count: number
+}
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -34,7 +41,8 @@ ChartJS.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement
 )
 
 const options = {
@@ -48,6 +56,19 @@ const options = {
 const CustomPage = () => {
   const [ordersByCustomer, setOrdersByCustomer] = useState<OrdersByCustomer[]>([])
   const [collectionProducts, setCollectionProducts] = useState<CollectionProduct[]>([])
+
+  const [ordersByRegion, setOrdersByRegion] = useState<RegionOrder[]>([])
+
+  useEffect(() => {
+    fetch("http://localhost:9000/routes/region_order")
+      .then(res => res.json())
+      .then((data) => {
+        // Solo regiones con menos de 10 órdenes
+        const filtered = data.filter((r: RegionOrder) => r.order_count < 10)
+        setOrdersByRegion(filtered)
+      })
+      .catch(err => console.error("Error al cargar órdenes por región:", err))
+  }, [])
 
   useEffect(() => {
     fetch("http://localhost:9000/routes/client_order")
@@ -218,6 +239,58 @@ const CustomPage = () => {
             }}
           />
         </div>
+
+        {/* Gráfico: Órdenes por Región (<10) */}
+        <div className="h-96 w-full p-4 rounded-xl border-2 shadow">
+          <Pie
+            data={{
+              labels: ordersByRegion.map((r) => r.region_name),
+              datasets: [
+                {
+                  label: "Órdenes",
+                  data: ordersByRegion.map((r) => r.order_count),
+                  backgroundColor: [
+                    "#3b65ff",  // Azul principal (igual que otras gráficas)
+                    "#5c8aff",  // Azul más claro
+                    "#7caeff",  // Azul pastel
+                    "#aac8ff",  // Azul grisáceo
+                    "#334155",  // Gris oscuro azulado (cool gray)
+                    "#64748b",  // Slate gray medio
+                    "#94a3b8",  // Slate claro
+                  ],
+                  borderColor: "#fff",
+                  borderWidth: 2,
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: {
+                    color: "#fff",
+                    font: { size: 12 },
+                  },
+                },
+                title: {
+                  display: true,
+                  text: "Órdenes por Región (<10)",
+                  color: "#fff",
+                  font: {
+                    size: 16,
+                    weight: "bold",
+                  },
+                },
+                tooltip: {
+                  bodyFont: { size: 12 },
+                  titleFont: { size: 12 },
+                },
+              },
+            }}
+          />
+        </div>
+
 
 
 
