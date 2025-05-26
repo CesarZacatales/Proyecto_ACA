@@ -17,6 +17,7 @@ import {
 import { Bar, Pie } from "react-chartjs-2"
 import GananciasChart from "./components/GananciasChart"
 import { SortProductsDesc, SortByOrdersDesc, FilterByRegionOrders10 } from "./utils"
+import PedidosEstadoChart from "./components/PedidosPorEstadoChart"
 
 type OrdersByCustomer = {
   customer: string
@@ -259,7 +260,7 @@ const CustomPage = () => {
                     "#64748b",  // Slate gray medio
                     "#94a3b8",  // Slate claro
                   ],
-                  borderColor: "#fff",
+                  borderColor: "#444",
                   borderWidth: 2,
                 },
               ],
@@ -292,7 +293,10 @@ const CustomPage = () => {
           />
         </div>
 
-
+        {/* Gráfico: Pedidos por Estado */}
+        <div className="h-96 w-full p-4 rounded-xl border-2 shadow">
+          <PedidosEstadoChart />
+        </div>
 
 
       </div>
