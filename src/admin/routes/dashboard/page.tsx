@@ -16,7 +16,7 @@ import {
 } from "chart.js"
 import { Bar, Pie } from "react-chartjs-2"
 import GananciasChart from "./components/GananciasChart"
-import { SortProductsDesc, SortByOrdersDesc } from "./utils"
+import { SortProductsDesc, SortByOrdersDesc, FilterByRegionOrders10 } from "./utils"
 
 type OrdersByCustomer = {
   customer: string
@@ -65,7 +65,7 @@ const CustomPage = () => {
       .then(res => res.json())
       .then((data) => {
         // Solo regiones con menos de 10 órdenes
-        const filtered = data.filter((r: RegionOrder) => r.order_count < 10)
+        const filtered = FilterByRegionOrders10(data)
         setOrdersByRegion(filtered)
       })
       .catch(err => console.error("Error al cargar órdenes por región:", err))
