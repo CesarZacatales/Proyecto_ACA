@@ -162,7 +162,7 @@ const CustomPage = () => {
                   data: collectionProducts.map((c) => c.product_count),
                   backgroundColor: "#3b65ff",
                   borderRadius: 8,
-                  barThickness: 20,
+                  barThickness: 32,
                   categoryPercentage: 0.6,
                   barPercentage: 0.8,
                 },
@@ -179,8 +179,7 @@ const CustomPage = () => {
                     color: "#fff",
                   },
                   grid: {
-                    display: true,
-                    color: "#444",
+                    display: false,
                   },
                 },
                 y: {
@@ -189,7 +188,8 @@ const CustomPage = () => {
                     color: "#fff",
                   },
                   grid: {
-                    display: false,
+                    display: true,
+                    color: "#444",
                   },
                 },
               },
@@ -218,6 +218,8 @@ const CustomPage = () => {
             }}
           />
         </div>
+
+
 
       </div>
     </Container>
