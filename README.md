@@ -70,7 +70,6 @@ Aplicaciones de Código Abierto – Ciclo 01/2025
 5. [Migraciones y Seed de Datos](#5-migraciones-y-seed-de-datos)  
 6. [Inicio del Servidor](#6-inicio-del-servidor)  
 7. [Acceso al Panel de Administración con Gráficas](#7-acceso-al-panel-de-administración-con-gráficas)  
-   - [Ejemplo de la visualización](#71-ejemplo-de-la-visualización)  
 8. [Endpoints Nuevos para Gráficas](#8-endpoints-nuevos-para-gráficas)  
 9. [Scripts Útiles del Proyecto](#9-scripts-útiles-del-proyecto)  
 
@@ -127,19 +126,7 @@ Este comando instalará todas las bibliotecas y módulos definidos en `package.j
 
 ## 4. Configuración de Variables de Entorno (.env)
 
-Crea un archivo `.env` en la raíz del proyecto y agrega lo siguiente:
-
-```env
-MEDUSA_ADMIN_ONBOARDING_TYPE=nextjs
-STORE_CORS=http://localhost:8000,https://docs.medusajs.com
-ADMIN_CORS=http://localhost:5173,http://localhost:9000,https://docs.medusajs.com
-AUTH_CORS=http://localhost:5173,http://localhost:9000,http://localhost:8000,https://docs.medusajs.com
-REDIS_URL=redis://localhost:6379
-JWT_SECRET=supersecret
-COOKIE_SECRET=supersecret
-DATABASE_URL=postgresql://postgres.ultvuhxuetgyiblyykrs:1234@aws-0-us-east-2.pooler.supabase.com:5432/postgres
-MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=my-medusa-store-storefront
-```
+> Verifica que `DATABASE_URL` esté correctamente configurado en el archivo `.env`.
 
 ---
 
@@ -150,9 +137,6 @@ Antes de iniciar el sistema, es necesario aplicar las migraciones a la base de d
 ```bash
 npm run medusa migrations run
 ```
-
-> Verifica que `DATABASE_URL` esté correctamente configurado en el archivo `.env`.
-
 ---
 
 ## 6. Inicio del Servidor
@@ -177,16 +161,6 @@ Inicia sesión con las siguientes credenciales:
 
 Desde este panel, los administradores pueden visualizar gráficas detalladas para análisis de mercado:
 
-- Ventas por día o mes  
-- Productos más vendidos  
-- Nuevos usuarios registrados  
-- Pedidos según estado  
-
-Las gráficas están conectadas dinámicamente a la base de datos y se actualizan automáticamente.
-
-### 7.1 Ejemplo de la visualización
-
-
 ---
 
 ## 8. Endpoints Nuevos para Gráficas
@@ -195,9 +169,9 @@ Se han creado endpoints REST personalizados para alimentar las gráficas del adm
 
 | Método | Endpoint                    | Descripción              |
 |--------|-----------------------------|--------------------------|
-| GET    | `/admin/stats/sales`        | Ventas por fecha         |
-| GET    | `/admin/stats/products`     | Productos más vendidos   |
-| GET    | `/admin/stats/customers`    | Nuevos usuarios registrados |
+| GET    | `/admin/routes/region_order`| Ordenes por region       |
+| GET    | `/admin/routes/collection_product`| Productos por colección |
+| GET    | `/admin/routes/client_order`| Ordenes por cliente |
 
 ---
 
